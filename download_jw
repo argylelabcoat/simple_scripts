@@ -1,0 +1,38 @@
+#!/usr/local/bin/python3
+
+import requests
+from urllib.parse import parse_qs
+from bs4 import BeautifulSoup
+import sys
+
+def is_param_named_flashvars(tag):
+    return tag.name=='param' and tag.has_attr('name') and tag['name']=='flashvars' and tag.has_attr('value')
+
+def download_file(url):
+    local_filename = url.split('/')[-1]
+    # NOTE the stream=True parameter
+    r = requests.get(url, stream=True)
+    with open(local_filename, 'wb') as f:
+        for chunk in r.iter_content(chunk_size=1024): 
+            if chunk: # filter out keep-alive new chunks
+                f.write(chunk)
+                f.flush()
+    return local_filename
+
+def download_files(url):
+    req = requests.get(url)
+    html = req.text
+    soup = BeautifulSoup(html)
+    params = soup.find_all(is_param_named_flashvars)
+    for p in params:
+        pdict = parse_qs(p['value'])
+        if pdict['file'] is not None:
+            print('downloading: %s' % pdict['file'][0])
+            print('saved to %s' % download_file(pdict['file'][0]))
+
+
+if __name__=='__main__':
+    if len(sys.argv) < 2:
+        print('Please specify a URL as an argument')
+    else:
+        download_files(sys.argv[1])
