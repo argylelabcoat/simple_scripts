@@ -1,16 +1,30 @@
-#!/usr/bin/python
+#!python
 
-from random import choice
+import random
 import string
+import argparse
 
-def GenPasswd():
-    chars = string.letters + string.digits
-    for i in range(8):
-        newpasswd = newpasswd + choice(chars)
-    return newpasswd
-
-def GenPasswd2(length=8, chars=string.letters + string.digits + "!?+_-.:;"):
-    return ''.join([choice(chars) for i in range(length)])
+def gen_password(password_length, use_punctuation=True, custom_chars=''):
+	possible = string.ascii_letters + string.digits
+	if use_punctuation is True:
+		possible += string.punctuation
+	if len(custom_chars) > 0:
+		possible += custom_chars
+	pw = [ random.choice(possible) for x in range(password_length)]
+	print("".join(pw))
 
 if __name__=='__main__':
-	print(GenPasswd2(16))
+	parser = argparse.ArgumentParser(description='Generate some passwords')
+	parser.add_argument('length', metavar='Length', type=int, nargs='?',
+                    help='the length of password to generate', default=32)
+	parser.add_argument('count', metavar='Count', type=int, nargs='?',
+                    help='the number of passwords to generate', default=1)
+	parser.add_argument('--no-special', dest='special', action='store_false',
+                    help='disables use of special characters')
+	parser.add_argument('--custom-special', dest='custom', type=str, nargs='?',
+		    help='list of special characters possible', default='')
+	parser.set_defaults(special=True)
+
+	arguments = parser.parse_args()
+	for i in range (arguments.count):
+		gen_password(arguments.length, arguments.special, arguments.custom)
