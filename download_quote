@@ -1,13 +1,18 @@
 #! /usr/bin/python
-import urllib
-import scriptine.shell
-
+import urllib.parse
+import argparse
+import httpie
+import httpie.core as httpie
 
 def download_command(quoted):
-	url = urllib.unquote(quoted)
-	scriptine.shell.call(['curl', '-O', url])
+	url = urllib.parse.unquote(quoted)
+	fname = url.split('/')[-1]
+	httpie.main(["--download","--continue", "--output",fname, url])
 
 if __name__ == '__main__':
-		scriptine.run()
+		parser = argparse.ArgumentParser(description='Download a file from quoted url')
+		parser.add_argument('url', type=str, help='quoted url')
+		args = parser.parse_args()
+		download_command(args.url)
 
 
