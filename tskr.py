@@ -34,7 +34,7 @@ class WorkEntry:
 
 	def get_json(self):
 		json_dict = self.__dict__.copy()
-		json_dict['when'] = self.when.strftime("YYYY-MM-DD HH:mm")
+		json_dict['when'] = self.when.strftime("%Y-%M-%d %H:%m")
 		return json.dumps(json_dict)
 
 	list_template = string.Template("""
@@ -108,6 +108,7 @@ class Dao:
 	def __init__(self, db):
 		self.db = db
 
+
 	def get_log(self, log_id):
 		log_item_json = self.db.get("log.{}".format(log_id), None)
 		if log_item_json != None:
@@ -115,16 +116,35 @@ class Dao:
 			return log_item
 		return None
 
+	def get_logs(self):
+		last_entry_id = int(dao.db.get("last_log_id", -1))
+		logs = []
+		for id in range(last_entry_id+1):
+			item = dao.get_log(id)
+			if item:
+				logs.append(item)
+		return logs
+
+	def remove_log(self, log_id):
+		log_item = self.get_log(log_id)
+		if log_item:
+			log_list_json = self.db.get("t.{}.log".format(log_item.task_id), "[]")
+			log_list = json.loads(log_list_json)
+
+			log_list.remove(log_id)
+			log_list_json = json.dumps(log_list)
+			self.db["t.{}.log".format(log_item.task_id)] = log_list_json
+
+			del self.db["log.{}".format(log_id)]
+
 	def get_task_log(self, task_id):
 		log_list_json = self.db.get("t.{}.log".format(task_id), "[]")
 		log_list = json.loads(log_list_json)
 		logs = []
 
 		for log_id in log_list:
-			log_json = self.db.get("log.{}".format(log_id), None)
-			log_item = None
-			if log_json != None:
-				log_item = WorkEntry(js=log_json)
+			log_item = self.get_log(log_id)
+			if log_item:
 				logs.append(log_item)
 		return logs
 
@@ -164,7 +184,9 @@ class Dao:
 		log_list = json.loads(log_list_json)
 		if not log_item.entry_id in log_list:
 			log_list.append(log_item.entry_id)
-			self.db["t.{}.log".format(log_item.task_id)] = json.dumps(log_list)
+			list_json = json.dumps(log_list)
+			print(list_json)
+			self.db["t.{}.log".format(log_item.task_id)] = list_json
 
 		
 	def store_task(self, task):
@@ -198,19 +220,19 @@ def list_tasks(dao, arguments):
 	print('-'*72)
 	_list_tasks(dao,open_only)
 	
-def report_all(dao, task_id):
-	logs = dao.get_task_log(task_id)
+def report_all(dao):
+	logs = dao.get_logs()
 	for item in logs:
 		print(item.list_str())
 
-def _report(dao, task_id, since):
-	logs = dao.get_task_log(task_id)
-	logs_since = [ item for item in logs if item.when > since]
+def _report(dao, since):
+	logs = dao.get_logs()
+	logs_since = [ item for item in logs if datetime.datetime.strptime(item.when,"%Y-%M-%d %H:%m") > since]
 	for item in logs_since:
 		print(item.list_str())
 
 def report(dao, arguments):
-	_report(dao, arguments.task_id, arguments.since)
+	_report(dao, arguments.since)
 
 def _view_task(dao, task_id):
 	task = dao.get_task(task_id)
@@ -299,6 +321,25 @@ def update_log(dao, arguments):
 
 	_update_log(dao, arguments.log_id, comment, duration)
 
+def remove_log(dao, arguments):
+	dao.remove_log(arguments.log_id)
+
+
+def view_log(dao, arguments):
+	last_entry_id = int(dao.db.get("last_log_id", -1))
+	for id in range(last_entry_id+1):
+		item = dao.get_log(id)
+		if item:
+			print(item.list_str())
+
+	tasks = dao.get_tasks()
+	for task in tasks:
+		task_log = dao.get_task_log(task.task_id)
+		if len(task_log) > 0:
+			print(task.list_str())
+			for item in task_log:
+				print(item.list_str())
+
 
 command_help="""command to perform against task list
   Options include:
@@ -340,18 +381,25 @@ if __name__=='__main__':
 			help='start datetime in format "YYYY-MM-DD HH:mm"')
 		report_parser.set_defaults(func=report)
 
-#task_id, comment, duration
-		log_parser = subparsers.add_parser('log', help='log time against a task')
-		log_parser.add_argument('task_id', type=int, help='id of task to log time against')
-		log_parser.add_argument('comment', type=str, help='a brief description of the work done')
-		log_parser.add_argument('duration', type=float, help='time duration in hours')
-		log_parser.set_defaults(func=new_log)
+		log_view_parser = subparsers.add_parser('log', help='view time log')
+		log_view_parser.set_defaults(func=view_log)
 
-		log_update_parser = subparsers.add_parser('update-log', help='update log entry')
-		log_update_parser.add_argument('log_id', type=int, help='id of log item to update')
-		log_update_parser.add_argument('comment', type=str, help='a brief description of the work done')
-		log_update_parser.add_argument('duration', type=float, help='time duration in hours')
-		log_update_parser.set_defaults(func=update_log)
+#task_id, comment, duration
+		time_entry_parser = subparsers.add_parser('enter-time', help='enter time against a task')
+		time_entry_parser.add_argument('task_id', type=int, help='id of task to enter time against')
+		time_entry_parser.add_argument('comment', type=str, help='a brief description of the work done')
+		time_entry_parser.add_argument('duration', type=float, help='time duration in hours')
+		time_entry_parser.set_defaults(func=new_log)
+
+		time_update_parser = subparsers.add_parser('update-time', help='update time entry')
+		time_update_parser.add_argument('log_id', type=int, help='id of time item to update')
+		time_update_parser.add_argument('comment', type=str, help='a brief description of the work done')
+		time_update_parser.add_argument('duration', type=float, help='time duration in hours')
+		time_update_parser.set_defaults(func=update_log)
+
+		time_remove_parser = subparsers.add_parser('rm-time', help='remove time entry')
+		time_remove_parser.add_argument('log_id', type=int, help='id of time item to remove')
+		time_remove_parser.set_defaults(func=remove_log)
 
 #job_number, name, description, estimate
 		task_parser = subparsers.add_parser('new', help='create a new task')
