@@ -82,9 +82,15 @@ Estimate: $estimate
 Time Logged: $time_logged
 
 """)
-	list_template = string.Template("""
-$task_id/$version::$job_number $name 
-""")
+	list_template = string.Template("""$task_id/$version::$job_number\t\t$name\t\t$estimate""")
+
+	def list_header():
+		return Task.list_template.substitute({
+			'task_id':'id',
+			'version':'version',
+			'name':'task name',
+			'job_number':'job_#',
+			'estimate':'estimate'})
 
 	def list_str(self):
 		return self.list_template.substitute(self.__dict__)
@@ -179,7 +185,6 @@ def _list_tasks(dao, open_only=True):
 		tasks = [task for task in dao.get_tasks() if task.is_open == True]
 	else:
 		tasks = dao.get_tasks()
-	print(open_only,len(tasks))
 	for task in tasks:
 		print(task.list_str())
 
@@ -187,6 +192,8 @@ def list_tasks(dao, arguments):
 	open_only = True
 	if arguments.open_only:
 		open_only=not arguments.open_only
+	print(Task.list_header())
+	print('-'*72)
 	_list_tasks(dao,open_only)
 	
 def report_all(dao, task_id):
