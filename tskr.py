@@ -218,7 +218,8 @@ def _view_task(dao, task_id):
 		for log in logs:
 			time_logged += log.duration
 		print(task.detail_str(time_logged))
-	print("No such task")
+	else:
+		print("No such task")
 def view_task(dao, arguments):
 	_view_task(dao, arguments.task_id)
 
