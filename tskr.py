@@ -33,7 +33,9 @@ class WorkEntry:
 			self.__dict__ = json.loads(js)
 
 	def get_json(self):
-		return json.dumps(self.__dict__)
+		json_dict = self.__dict__.copy()
+		json_dict['when'] = self.when.strftime("YYYY-MM-DD HH:mm")
+		return json.dumps(json_dict)
 
 	list_template = string.Template("""
 $when :: $entry_id/$task_id
@@ -154,14 +156,14 @@ class Dao:
 		entry_id = int(self.db.get("last_log_id", -1))
 		if log_item.entry_id < 0:
 			log_item.entry_id = entry_id + 1
-			self.db[last_log_id] = str(log_item.entry_id)
+			self.db["last_log_id"] = str(log_item.entry_id)
 
 		self.db["log.{}".format(log_item.entry_id)]=log_item.get_json()
 
 		log_list_json = self.db.get("t.{}.log".format(log_item.task_id), "[]")
 		log_list = json.loads(log_list_json)
 		if not log_item.entry_id in log_list:
-			log_list.append(log_item)
+			log_list.append(log_item.entry_id)
 			self.db["t.{}.log".format(log_item.task_id)] = json.dumps(log_list)
 
 		
