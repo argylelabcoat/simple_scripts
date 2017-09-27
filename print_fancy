@@ -1,0 +1,10 @@
+#!/bin/sh
+pandoc $1 -H header.tex  -s --latex-engine=xelatex -t latex -V papersize:letter -V geometry:"top=2cm, bottom=1.5cm, left=1cm, right=1cm" -o $1.tex
+xelatex $1.tex
+rm $1.log
+rm $1.aux
+rm $1.out
+rm $1.tex
+lp -o number-up=2 -o page-border=1 $1.pdf 
+rm $1.pdf
+

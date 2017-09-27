@@ -1,0 +1,13 @@
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{datetime2}
+\usepackage{currfile}
+\usepackage[pagecolor=none]{pagecolor}
+
+\pagestyle{fancy}
+\definecolor{boxcolor}{rgb}{.94,.97,1}
+\fancyhf{}
+\fancyhead{\colorbox{boxcolor}}
+\rhead{\colorbox{boxcolor}{Page \thepage \hspace{1pt}/\pageref{LastPage}}}
+\lhead{\colorbox{boxcolor}{\today \hspace{5pt} \DTMcurrenttime}}
+\chead{\colorbox{boxcolor}{\currfilename}}
