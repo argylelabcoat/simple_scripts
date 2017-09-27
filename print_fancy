@@ -1,5 +1,8 @@
 #!/bin/sh
 pandoc $1 -H header.tex  -s --latex-engine=xelatex -t latex -V papersize:letter -V geometry:"top=2cm, bottom=1.5cm, left=1cm, right=1cm" -o $1.tex
+# need a 2nd pass for page #'s
+pandoc $1 -H header.tex  -s --latex-engine=xelatex -t latex -V papersize:letter -V geometry:"top=2cm, bottom=1.5cm, left=1cm, right=1cm" -o $1.tex
+
 xelatex $1.tex
 rm $1.log
 rm $1.aux
