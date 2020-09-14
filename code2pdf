@@ -1,0 +1,26 @@
+#!/bin/bash
+# you will want the texlive-xetex, texlive-latex-extra, and python3-pygments packages
+FONT="ProFontIIx NF"
+
+cat > $2.tex << EOF
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[nohead,margin=0.5in,footskip=0.25in,nomarginpar]{geometry}
+\usepackage{minted}
+\usepackage{fontspec}
+\setmainfont[Ligatures=TeX]{$FONT}
+\setmonofont{$FONT}
+
+\begin{document}
+{
+  \linespread{1.0}
+  \small
+  \inputminted[
+    linenos
+  ]{$1}{$2}
+}
+\end{document}
+EOF
+xelatex -shell-escape $2.tex
+rm $2.aux $2.log $2.tex
