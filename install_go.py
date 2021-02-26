@@ -1,5 +1,9 @@
+#!/usr/bin/env python3
+
 import feedparser
 import requests
+
+import subprocess
 
 download_url = lambda version: f'https://golang.org/dl/{version}.linux-amd64.tar.gz'
 
@@ -24,6 +28,10 @@ def download_file(url):
                 f.write(chunk)
     return local_filename
 
+def install(fname):
+    subprocess.run(["sudo", "tar", "-C", "/usr/local", "-xf", fname])
+
 if __name__ == '__main__':
     gourl = get_latest_url()
-    download_file(gourl)
+    fname = download_file(gourl)
+    install(fname)
