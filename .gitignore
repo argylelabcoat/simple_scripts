@@ -2,3 +2,4 @@ _minted-*/
 *.pdf
 *.log
 .venv/
+.direnv/
