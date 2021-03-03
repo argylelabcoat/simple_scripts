@@ -13,7 +13,11 @@ sudo zypper in -t pattern devel_basis devel_C_C++ devel_python
 #################################################
 ## Development Libs / Tools
 
-sudo zypper install  openssl-devel clang-tools \
+# I need openssl-devel for building starship.rs
+# I need libnotify-devel for building tomboy-ng
+
+sudo zypper install  openssl-devel libnotify-devel\
+clang-tools \
 lazarus anjuta anjuta-extras glade codelite gnome-builder \
 neovim emacs \
 scons ninja direnv
