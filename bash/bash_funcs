@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# guix install ripgrep fd go-github-com-junegunn-fzf the-silver-searcher bat
+
+
+# fd is much faster than find, so we'll use it by default
+export FZF_DEFAULT_COMMAND="fd ."
+
+# find-in-file - usage: fif <SEARCH_TERM>
+fif() {
+  if [ ! "$#" -gt 0 ]; then
+    echo "Need a string to search for!";
+    return 1;
+  fi
+  rg --files-with-matches --no-messages "$1" | fzf $FZF_PREVIEW_WINDOW --preview "rg --ignore-case --pretty --context 10 '$1' {}"
+}
+
+codefind() {
+  if [ ! "$#" -gt 1 ]; then
+    echo "Need a string to search for!";
+    return 1;
+  fi
+  ag --$1 -l "$2" | fzf --preview "ag --color --column -C 10 '$2' {}"
+}
+
+gethashes(){
+  githash=$(git rev-parse HEAD)
+  guixhash=$(guix hash -rx -f base32 .)
+
+  echo "Git Hash: ${githash}"
+  echo "Guix Hash: ${guixhash}"
+}
+
+# find and preview files by name
+alias fzfpr="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+
+git config alias.cleanorig "clean -f */*.orig"

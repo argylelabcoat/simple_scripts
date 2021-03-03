@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Rust
+source $HOME/.cargo/env
+
+# Go
+export PATH=/usr/local/go/bin:$PATH
+
+# Home Bin
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$PATH
+# Add Seamonkey ;)
+export PATH=/opt/seamonkey/:$PATH
+
+# Historical Arrows:
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
+# Neovim as Editor
+export EDITOR=$(which nvim)
+
+# Starship
+# sudo snap install starship
+eval "$(starship init bash)"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# direnv
+eval "$(direnv hook bash)"
+
