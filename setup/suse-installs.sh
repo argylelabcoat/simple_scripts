@@ -20,7 +20,7 @@ sudo zypper install  openssl-devel libnotify-devel \
 clang-tools \
 lazarus anjuta anjuta-extras glade codelite gnome-builder \
 neovim emacs \
-scons ninja direnv
+cmake scons ninja direnv
 
 
 #################################################
