@@ -26,7 +26,8 @@ cmake scons ninja direnv
 #################################################
 ## Commandline Tools
 
-sudo zypper in fzf fd ripgrep bat the_silver_searcher
+sudo zypper in fzf fd ripgrep bat the_silver_searcher \
+  bc lzop
 
 #################################################
 ## Containers / Tools
