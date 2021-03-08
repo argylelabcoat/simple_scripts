@@ -3,12 +3,12 @@
 #################################################
 ## Source Control
 
-sudo zypper install git mercurial subversion fossil
+sudo zypper install -y git mercurial subversion fossil
 
 #################################################
 ## Development Patterns
 
-sudo zypper in -t pattern devel_basis devel_C_C++ devel_python3
+sudo zypper in -y -t pattern devel_basis devel_C_C++ devel_python3
 
 #################################################
 ## Development Libs / Tools
@@ -16,18 +16,24 @@ sudo zypper in -t pattern devel_basis devel_C_C++ devel_python3
 # I need openssl-devel for building starship.rs
 # I need libnotify-devel for building tomboy-ng
 
-sudo zypper install  openssl-devel libnotify-devel \
+sudo zypper in -y openssl-devel libnotify-devel \
 clang-tools \
 lazarus anjuta anjuta-extras glade codelite gnome-builder \
-neovim emacs \
 cmake scons ninja direnv
 
 
 #################################################
 ## Commandline Tools
 
-sudo zypper in fzf fd ripgrep bat the_silver_searcher \
+sudo zypper in -y fzf fd ripgrep bat the_silver_searcher \
   bc lzop
+
+#################################################
+## Editor Tools
+
+sudo zypper in -y ShellCheck editorconfig MultiMarkdown-6 \
+neovim emacs
+
 
 #################################################
 ## Containers / Tools
