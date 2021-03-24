@@ -59,7 +59,7 @@ def print_dir(path=".", indent=0, prefix=""):
                 pathicon = icon_lowerleftcorner
                 indenticon = " "
 
-        indentStr = prefix + pathicon + icon_horizontal * indent
+        indentStr = prefix + pathicon + icon_horizontal * tab_size
         indentPrefix = prefix + indenticon + " " * indent 
         print(f"{indentStr}{icon} {item}")
         
