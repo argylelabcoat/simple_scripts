@@ -4,6 +4,8 @@ import feedparser
 import requests
 
 import subprocess
+import os
+import shutil
 
 download_url = lambda version: f'https://golang.org/dl/{version}.linux-amd64.tar.gz'
 
@@ -29,9 +31,15 @@ def download_file(url):
     return local_filename
 
 def install(fname):
+    if os.path.exists("/usr/local/go"):
+        subprocess.run(["sudo", "rm", "-rf", "/usr/local/go"])
     subprocess.run(["sudo", "tar", "-C", "/usr/local", "-xf", fname])
+
+def cleanup(fname):
+    os.remove(fname)
 
 if __name__ == '__main__':
     gourl = get_latest_url()
     fname = download_file(gourl)
     install(fname)
+    cleanup(fname)
