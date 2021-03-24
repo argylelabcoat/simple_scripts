@@ -27,7 +27,7 @@ def print_tree(d, indent=0, prefix=""):
                 pathicon = icon_lowerleftcorner
                 indenticon = " "
         indentStr = prefix + pathicon + icon_horizontal * tab_size
-        indentPrefix = prefix + indenticon + " " * indent 
+        indentPrefix = prefix + indenticon + " " *  tab_size
         entry = item.popitem()
         print(f"{indentStr}{icon_folder} {entry[0]}")
         print_tree(entry[1], indent+1, indentPrefix)
@@ -60,7 +60,7 @@ def print_dir(path=".", indent=0, prefix=""):
                 indenticon = " "
 
         indentStr = prefix + pathicon + icon_horizontal * tab_size
-        indentPrefix = prefix + indenticon + " " * indent 
+        indentPrefix = prefix + indenticon + " " * tab_size  
         print(f"{indentStr}{icon} {item}")
         
         if isdir:
