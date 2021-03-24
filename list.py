@@ -11,7 +11,7 @@ icon_teeright = "├"
 icon_vertical = "│"
 icon_horizontal = "─"
 
-
+tab_size = 2
 
 def print_tree(d, indent=0, prefix=""):
     indentStr = ""
@@ -26,7 +26,7 @@ def print_tree(d, indent=0, prefix=""):
             else:
                 pathicon = icon_lowerleftcorner
                 indenticon = " "
-        indentStr = prefix + pathicon + icon_horizontal * indent
+        indentStr = prefix + pathicon + icon_horizontal * tab_size
         indentPrefix = prefix + indenticon + " " * indent 
         entry = item.popitem()
         print(f"{indentStr}{icon_folder} {entry[0]}")
