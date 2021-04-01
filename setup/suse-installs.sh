@@ -26,7 +26,7 @@ cmake scons ninja direnv
 ## Commandline Tools
 
 sudo zypper in -y fzf fd ripgrep bat the_silver_searcher \
-  bc lzop
+  bc lzop maim asciinema
 
 #################################################
 ## Editor Tools
