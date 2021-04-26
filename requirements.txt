@@ -5,8 +5,9 @@ feedparser==6.0.2
 httpie==2.4.0
 idna==2.10
 Pygments==2.8.0
+PySocks==1.7.1
 requests==2.25.1
 requests-toolbelt==0.9.1
 sgmllib3k==1.0.0
 soupsieve==2.2
-urllib3==1.26.3
+urllib3==1.26.4
