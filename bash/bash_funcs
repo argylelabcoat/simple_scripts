@@ -34,4 +34,34 @@ gethashes(){
 # find and preview files by name
 alias fzfpr="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
-git config alias.cleanorig "clean -f */*.orig"
+timestamp() {
+  date +"%Y-%m-%d_%H-%M-%S" # current time
+} 
+
+regshot(){
+  outname=~/Pictures/screen$(timestamp).png
+  maim -s  $outname
+  echo "saved to:$outname"
+}
+
+winshot(){
+  outname=~/Pictures/screen$(timestamp).png
+  maim  -i $(xdotool getactivewindow)  $outname
+  echo "saved to:$outname"
+}
+
+delayshot(){
+  outname=~/Pictures/screen$(timestamp).png
+  # -d 5 sets a timer of 5 seconds:
+  maim -i $(xdotool getactivewindow) -d 5 $outname 
+  echo "saved to:$outname"
+}
+
+clipshot(){
+  maim -s | xclip -selection clipboard -t image/png
+}
+
+track(){
+  branch=$(git branch --show-current)
+  git push --set-upstream origin $branch
+}
