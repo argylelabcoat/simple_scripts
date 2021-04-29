@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "simple_scripts"
+version = "0.1.0"
+description = "Simple Python Scripts"
+authors = ["Matthew Hughes <matt@argylelabco.at>"]
+license = "gpl"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+beautifulsoup4 = "4.9.3"
+certifi = "2020.12.5"
+chardet = "4.0.0"
+feedparser = "6.0.2"
+httpie = "2.4.0"
+idna = "2.10"
+Pygments = "2.8.1"
+PySocks = "1.7.1"
+requests = "2.25.1"
+requests-toolbelt = "0.9.1"
+sgmllib3k = "1.0.0"
+soupsieve = "2.2.1"
+urllib3 = "1.26.4"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
