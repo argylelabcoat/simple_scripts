@@ -17,7 +17,7 @@ xz zstd gzip bzip2 zip unzip lzop \
 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman \
 git mercurial subversion fossil \
 zathura zathura-cb zathura-djvu zathura-pdf-mupdf zathura-ps \
-maim rofi alacritty
+maim rofi alacritty xpad udiskie feh
 
 yay -S \
 emacs-native-comp-git-enhanced \
