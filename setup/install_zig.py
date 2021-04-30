@@ -22,7 +22,7 @@ def download_file(url):
 def install(fname):
     dirname = '/usr/local/zig/'+fname.split('.tar')[0]
     if not os.path.exists("/usr/local/zig"):
-        os.makedirs("/usr/local/zig")
+        subprocess.run(["sudo", "mkdir", "-p", "/usr/local/zig"])
     subprocess.run(["sudo", "tar", "-C", "/usr/local/zig", "-xf", fname])
     if os.path.exists('/usr/local/zig/current'):
         subprocess.run(["sudo", "rm", "/usr/local/zig/current"])
