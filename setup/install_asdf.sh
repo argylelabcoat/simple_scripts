@@ -41,3 +41,6 @@ asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
 ## Go
 asdf plugin-add golang https://github.com/kennyp/asdf-golang.git
 
+## NodeJS
+asdf plugin-add nodejs
+
