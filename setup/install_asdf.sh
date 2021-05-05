@@ -26,6 +26,9 @@ EOF
 ## MESON
 asdf plugin-add meson https://github.com/asdf-community/asdf-meson.git
 
+## CMake
+asdf plugin-add cmake
+
 ## RUST
 asdf plugin-add rust https://github.com/code-lever/asdf-rust.git
 
