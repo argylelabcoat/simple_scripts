@@ -14,8 +14,8 @@ git checkout "$(git describe --abbrev=0 --tags)"
 
 ## DIRENV
 asdf plugin-add direnv
-asdf install direnv 2.20.0
-asdf global  direnv 2.20.0
+asdf install direnv 2.28.0
+asdf global  direnv 2.28.0
 
 mkdir -p $HOME/.config/direnv
 
@@ -28,6 +28,9 @@ asdf plugin-add meson https://github.com/asdf-community/asdf-meson.git
 
 ## CMake
 asdf plugin-add cmake
+
+## Ninja
+asdf plugin-add ninja
 
 ## RUST
 asdf plugin-add rust https://github.com/code-lever/asdf-rust.git
@@ -46,4 +49,7 @@ asdf plugin-add golang https://github.com/kennyp/asdf-golang.git
 
 ## NodeJS
 asdf plugin-add nodejs
+
+## Yarn
+asdf plugin-add yarn
 
