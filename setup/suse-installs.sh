@@ -19,14 +19,16 @@ sudo zypper in -y -t pattern devel_basis devel_C_C++ devel_python3
 sudo zypper in -y openssl-devel libnotify-devel \
 clang-tools \
 lazarus anjuta anjuta-extras glade codelite gnome-builder \
-cmake scons ninja direnv
+cmake scons ninja direnv \
+clang12 clang-tools lldb12 \
+libc++1 libc++abi-devel libc++abi1 libc++-devel \
 
 
 #################################################
 ## Commandline Tools
 
 sudo zypper in -y fzf fd ripgrep bat the_silver_searcher \
-  bc lzop maim asciinema ranger tmux screen \
+  bc lzop maim asciinema ranger tmux screen calcurse \
   nmap
 
 #################################################
