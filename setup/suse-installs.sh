@@ -3,7 +3,7 @@
 #################################################
 ## Source Control
 
-sudo zypper install -y git mercurial subversion fossil
+sudo zypper install -y git git-lfs mercurial subversion fossil
 
 #################################################
 ## Development Patterns
@@ -23,6 +23,9 @@ cmake scons ninja direnv \
 clang12 clang-tools lldb12 \
 libc++1 libc++abi-devel libc++abi1 libc++-devel \
 
+#################################################
+## Compression Tools
+sudo zypper in -y zip unzip zstd bzip2 xz
 
 #################################################
 ## Commandline Tools
@@ -49,7 +52,7 @@ sudo zypper install -y podman buildah
 
 sudo rpm --import https://www.scootersoftware.com/RPM-GPG-KEY-scootersoftware
 sudo zypper refresh
-sudo zypper install https://www.scootersoftware.com/bcompare-4.3.7.25118.x86_64.rpm
+sudo zypper install -y https://www.scootersoftware.com/bcompare-4.3.7.25118.x86_64.rpm
 
 
 #################################################
@@ -57,5 +60,5 @@ sudo zypper install https://www.scootersoftware.com/bcompare-4.3.7.25118.x86_64.
 
 sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
 sudo zypper addrepo -g -f https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
-sudo zypper install sublime-text sublime-merge
+sudo zypper install -y sublime-text sublime-merge
 
