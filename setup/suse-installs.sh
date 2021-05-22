@@ -29,19 +29,19 @@ libc++1 libc++abi-devel libc++abi1 libc++-devel \
 
 sudo zypper in -y fzf fd ripgrep bat the_silver_searcher \
   bc lzop maim asciinema ranger tmux screen calcurse \
-  nmap
+  nmap password-store dirmngr xclip
 
 #################################################
 ## Editor Tools
 
 sudo zypper in -y ShellCheck editorconfig MultiMarkdown-6 \
-neovim emacs
+  neovim emacs
 
 
 #################################################
 ## Containers / Tools
 
-sudo zypper install podman buildah
+sudo zypper install -y podman buildah
 
 
 #################################################

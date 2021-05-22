@@ -23,6 +23,15 @@ cat >> $HOME/.config/direnv/direnvrc <<'EOF'
  source "$(asdf direnv hook asdf)" 
 EOF
 
+cat >> $HOME/.tool-versions <<'EOF'
+direnv 2.28.0
+rust stable
+go 1.16.4
+nodejs lts-erbium
+starship 0.54.0
+lsd 0.20.1
+EOF
+
 ## MESON
 asdf plugin-add meson https://github.com/asdf-community/asdf-meson.git
 
@@ -53,3 +62,9 @@ asdf plugin-add nodejs
 ## Yarn
 asdf plugin-add yarn
 
+
+## Starship
+asdf plugin-add starship
+
+## My LSD Plugin
+asdf plugin add lsd https://github.com/argylelabcoat/asdf-lsd
