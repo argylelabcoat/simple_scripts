@@ -24,6 +24,13 @@ clang12 clang-tools lldb12 \
 libc++1 libc++abi-devel libc++abi1 libc++-devel \
 
 #################################################
+## Embedded Development 
+
+sudo zypper in -y sdcc sdcc-doc avr-libc avrdude \
+  cross-avr-binutils cross-avr-gcc11 cross-arm-none-gcc11 \
+  cross-arm-none-gcc11-bootstrap cross-arm-binutils
+
+#################################################
 ## Compression Tools
 sudo zypper in -y zip unzip zstd bzip2 xz
 
