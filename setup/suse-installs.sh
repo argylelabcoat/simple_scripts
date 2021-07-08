@@ -49,9 +49,26 @@ sudo zypper in -y ShellCheck editorconfig MultiMarkdown-6 \
   neovim emacs
 
 #################################################
+## Graphics Tools 
+
+sudo zypper in -y inkscape gimp gimp-ufraw ImageMagick \
+  blender krita goxel
+
+# wishlist
+# dust3d
+
+
+#################################################
+## CAD Tools 
+
+sudo zypper in -y openscad FreeCAD librecad leocad
+
+#################################################
 ## Electronics Tools 
 
-sudo zypper in -y kicad
+sudo zypper in -y kicad kicad-packages3D \
+  fritzing fritzing-parts \
+  pcb 
 
 #################################################
 ## Containers / Tools
