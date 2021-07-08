@@ -26,9 +26,10 @@ libc++1 libc++abi-devel libc++abi1 libc++-devel \
 #################################################
 ## Embedded Development 
 
-sudo zypper in -y sdcc sdcc-doc avr-libc avrdude \
+sudo zypper in -y sdcc sdcc-doc avr-libc avrdude uisp \
   cross-avr-binutils cross-avr-gcc11 cross-arm-none-gcc11 \
-  cross-arm-none-gcc11-bootstrap cross-arm-binutils
+  cross-arm-none-gcc11-bootstrap cross-arm-binutils \
+  openocd cc-tool
 
 #################################################
 ## Compression Tools
