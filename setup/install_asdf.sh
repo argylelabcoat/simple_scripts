@@ -76,9 +76,11 @@ asdf plugin-add nodejs
 ## Yarn
 asdf plugin-add yarn
 
-
 ## Starship
 asdf plugin-add starship
 
 ## My LSD Plugin
 asdf plugin add lsd https://github.com/argylelabcoat/asdf-lsd
+
+## flutter
+asdf plugin add flutter https://github.com/argylelabcoat/asdf-flutter

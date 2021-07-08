@@ -40,6 +40,10 @@ sudo zypper in -y fzf fd ripgrep bat the_silver_searcher \
 sudo zypper in -y ShellCheck editorconfig MultiMarkdown-6 \
   neovim emacs
 
+#################################################
+## Electronics Tools 
+
+sudo zypper in -y kicad
 
 #################################################
 ## Containers / Tools
