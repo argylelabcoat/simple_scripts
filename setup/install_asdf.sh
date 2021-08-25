@@ -37,15 +37,6 @@ layout_poetry() {
 }
 EOF
 
-cat >> $HOME/.tool-versions <<'EOF'
-direnv 2.28.0
-rust stable
-go 1.16.4
-nodejs lts-erbium
-starship 0.54.0
-lsd 0.20.1
-EOF
-
 ## MESON
 asdf plugin-add meson https://github.com/asdf-community/asdf-meson.git
 
@@ -84,3 +75,19 @@ asdf plugin add lsd https://github.com/argylelabcoat/asdf-lsd
 
 ## flutter
 asdf plugin add flutter https://github.com/argylelabcoat/asdf-flutter
+
+
+### INSTALL
+
+asdf install direnv 2.28.0
+asdf global direnv 2.28.0
+asdf install rust stable
+asdf global rust stable
+asdf install go 1.16.4
+asdf global go 1.16.4
+asdf install nodejs lts-erbium
+asdf global nodejs lts-erbium
+asdf install starship 0.54.0
+asdf global starship 0.54.0
+asdf install lsd 0.20.1
+asdf global lsd 0.20.1
