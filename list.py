@@ -66,25 +66,4 @@ def print_dir(path=".", indent=0, prefix=""):
         if isdir:
             print_dir(fname, indent+2, indentPrefix)
 
-
-
-
-tree=[{
-    "dirA":[
-        {"dirB":[
-            {"dir1":[
-                {"dir4":[]}
-                 ]},
-            {"dir3":[]}
-            ]},
-        {"dirC":[
-            {"dirD":[]}
-            ]},
-        {"dirE":[
-            {"dir2":[]}
-            ]}
-        ]},
-    ]
-
-print_tree(tree)
 print_dir()
