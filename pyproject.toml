@@ -8,7 +8,7 @@ license = "gpl"
 [tool.poetry.dependencies]
 python = "^3.8"
 beautifulsoup4 = "4.9.3"
-certifi = "2020.12.5"
+certifi = "2022.12.7"
 chardet = "4.0.0"
 feedparser = "6.0.2"
 httpie = "2.4.0"
